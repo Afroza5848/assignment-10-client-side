@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB-VW5o0H7Z9yGPVB3qDIau64GNNBNmZT0",
-  authDomain: "jute-and-timberzone.firebaseapp.com",
-  projectId: "jute-and-timberzone",
-  storageBucket: "jute-and-timberzone.appspot.com",
-  messagingSenderId: "358357458575",
-  appId: "1:358357458575:web:29674d2f80ca042f7a1afa"
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID
 };
 
 // Initialize Firebase
