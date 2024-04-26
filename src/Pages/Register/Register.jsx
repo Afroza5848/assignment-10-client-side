@@ -5,9 +5,9 @@ import logo from '../../assets/image/logo.png'
 const Register = () => {
     return (
         <div>
-            <div className="hero min-h-screen pt-10" style={{ backgroundImage: `url(${register})` }}>
-                <div className="w-full bg-opacity-60"></div>
-                <div className="hero-content text-center text-neutral-content w-full">
+            <div className="hero min-h-screen pt-20" style={{ backgroundImage: `url(${register})` }}>
+                <div className="hero-overlay w-full bg-opacity-60"></div>
+                <div className=" hero-content text-center text-neutral-content w-full">
                     <div className="w-full max-w-lg  p-4 rounded-md shadow sm:p-8 bg-[#08081dE6] dark:text-orange-400">
                         <img className='mx-auto py-5' src={logo} alt="" />
                         <h2 className="mb-3 text-3xl font-semibold text-center">Please Register Now!</h2>
@@ -17,7 +17,7 @@ const Register = () => {
 
                         <div className="flex items-center w-full my-4">
                             <hr className="w-full dark:text-gray-600" />
-                            <p className="px-3 dark:text-orange-600">---</p>
+                            <p className="px-3 dark:text-orange-400">---</p>
                             <hr className="w-full dark:text-gray-600" />
                         </div>
                         <form noValidate="" action="" className="space-y-8 ">

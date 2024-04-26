@@ -6,7 +6,7 @@ const Login = () => {
         <div>
 
             <div className="hero min-h-screen" style={{ backgroundImage: `url(${login})` }}>
-                <div className="bg-opacity-60"></div>
+                <div className="hero-overlay "></div>
                 <div className="hero-content w-full text-center text-neutral-content">
                     <div className="w-full max-w-lg  p-4 rounded-md shadow sm:p-8 bg-[#08081dE6] dark:text-orange-400">
                         <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
