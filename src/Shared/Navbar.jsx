@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import logo from "../assets/image/logo.png"
 import { Link, NavLink } from "react-router-dom";
-import { Tooltip } from 'react-tooltip';
+//import { Tooltip } from 'react-tooltip';
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Navbar = () => {
@@ -95,15 +95,15 @@ const Navbar = () => {
                 {
                     user ?
                         <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost ring ring-orange-500 ring-offset-gray-800 ring-offset-4 btn-circle avatar">
+                            <div tabIndex={0} role="button" className="btn btn-ghost ring ring-orange-500 ring-offset-gray-800 btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
                                 </div>
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                 <li>
                                     <a className="justify-between mb-3">
-                                        {user?.displayName || "name not found"}
+                                        {user?.displayName || "Name not found!"}
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
