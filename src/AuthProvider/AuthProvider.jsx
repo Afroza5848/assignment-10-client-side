@@ -9,39 +9,47 @@ import { GithubAuthProvider } from 'firebase/auth';
 
 
 export const AuthContext = createContext(null)
-const AuthProvider = ({children}) => {
-    const [user,setUser] = useState(null);
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // set user
-    const createUser = (email,password) => {
-        return createUserWithEmailAndPassword(auth,email,password);
+    const createUser = (email, password) => {
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password);
     }
     // sign in user
-    const signInUser = (email,password) => {
-        return signInWithEmailAndPassword(auth,email,password);
+    const signInUser = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
     }
     // logout
     const logOut = () => {
+        setLoading(true);
         return signOut(auth);
     }
     // google login
     const googleProvider = new GoogleAuthProvider();
     const googleLogin = () => {
-        return signInWithPopup(auth , googleProvider);
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
     }
+
     // github login
     const githubProvider = new GithubAuthProvider();
     const githubLogin = () => {
+        setLoading(true);
         return signInWithPopup(auth, githubProvider);
     }
+
     // update image and name
-    const createUpdateProfile = (name,image) => {
+    const createUpdateProfile = (name, image) => {
         setUser({
             ...user,
-            displayName:name,
-            photoURL:image,
-           })
-        return updateProfile(auth.currentUser,{
+            displayName: name,
+            photoURL: image,
+        })
+        return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: image
         })
@@ -51,16 +59,18 @@ const AuthProvider = ({children}) => {
 
     // observer
     useEffect(() => {
-       const unSubscribe =  onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser)
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            setLoading(false);
         })
         return () => {
             unSubscribe()
         }
-    },[])
+    }, [])
 
     const authInfo = {
         user,
+        loading,
         setUser,
         createUser,
         signInUser,
@@ -77,7 +87,7 @@ const AuthProvider = ({children}) => {
 };
 
 AuthProvider.propTypes = {
-    children:PropTypes.node
+    children: PropTypes.node
 };
 
 export default AuthProvider;

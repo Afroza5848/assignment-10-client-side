@@ -1,7 +1,6 @@
 
 
-
-const AllCraftItem = () => {
+const MyCraftList = () => {
     return (
         <div>
             
@@ -9,4 +8,4 @@ const AllCraftItem = () => {
     );
 };
 
-export default AllCraftItem;
+export default MyCraftList;

@@ -1,6 +1,6 @@
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/image/bglog.jpg'
 import { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
@@ -9,6 +9,11 @@ import Swal from "sweetalert2";
 
 
 const Login = () => {
+    const location = useLocation();
+    console.log(location);
+    const navigate = useNavigate();
+
+
     const { signInUser, googleLogin, githubLogin } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const {
@@ -23,11 +28,13 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 console.log(result.user);
+               
                 Swal.fire({
                     title: "Good job!",
                     text: "User Login Successfully.",
                     icon: "success"
                 });
+                navigate(location?.state ? location.state : "/");
             })
             .catch(error => {
                 console.error(error.message);
@@ -49,6 +56,7 @@ const Login = () => {
                     text: "User Login Successfully.",
                     icon: "success"
                 });
+                navigate(location?.state ? location.state : "/");
             })
     }
 

@@ -63,7 +63,7 @@ const Navbar = () => {
                 : isPending
                     ? "text-white font-medium text-xl eb-serif"
                     : "text-white font-medium text-xl eb-serif"
-        } to="/craftList"><a> My Art&Craft List</a></NavLink>
+        } to="/myCraftList"><a> My Art&Craft List</a></NavLink>
     </>
 
     return (
