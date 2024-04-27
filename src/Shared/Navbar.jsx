@@ -1,25 +1,39 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import logo from "../assets/image/logo.png"
 import { Link, NavLink } from "react-router-dom";
+import { Tooltip } from 'react-tooltip';
+import { AuthContext } from "../AuthProvider/AuthProvider";
+
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    console.log(logOut);
+    const userLogOut = () => {
+        logOut()
+            .then(result => {
+                console.log(result.user);
+
+                console.log('user delete successfully')
+            })
+            .catch(() => console.error())
+    }
     // set theme
-    const [theme,setTheme] = useState('light');
+    const [theme, setTheme] = useState('light');
     const handleTheme = (e) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             setTheme('synthwave')
         }
-        else{
+        else {
             setTheme('light')
         }
         console.log(theme);
     }
     useEffect(() => {
-        localStorage.setItem('theme',theme);
+        localStorage.setItem('theme', theme);
         const localTheme = localStorage.getItem('theme');
         document.querySelector('html').setAttribute('data-theme', localTheme)
-    },[theme])
+    }, [theme])
 
-    
+
 
     const navLink = <>
         <NavLink className={({ isActive, isPending }) =>
@@ -74,12 +88,60 @@ const Navbar = () => {
             </div>
             <div className="navbar-end space-x-3">
                 <label className="cursor-pointer grid place-items-center">
-                    <input onChange={handleTheme} type="checkbox"  className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
+                    <input onChange={handleTheme} type="checkbox" className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
                     <svg className="col-start-1 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" /></svg>
                     <svg className="col-start-2 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </label>
-                <Link to="/login" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Login</Link>
-                <Link to="/register" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Register</Link>
+                {
+                    user ?
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost ring ring-orange-500 ring-offset-gray-800 ring-offset-4 btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                <li>
+                                    <a className="justify-between mb-3">
+                                        {user?.displayName || "name not found"}
+                                        <span className="badge">New</span>
+                                    </a>
+                                </li>
+                                
+                                <button onClick={userLogOut} className="py-1 border border-orange-500 hover:bg-transparent hover:text-orange-500 rounded-md bg-orange-500 w-full text-white text-xl ">Logout</button>
+                            </ul>
+                        </div>
+
+                        :
+                        // <div>
+                        //     <a data-tooltip-id="my-tooltip"
+                        //         data-tooltip-delay-hide={2000}
+                        //         // eslint-disable-next-line react/no-unknown-property
+                        //         events={['click']}
+                        //      >
+                        //         <div className="avatar">
+                        //             <div className="w-12 rounded-full ring ring-orange-500 ring-offset-gray-800 ring-offset-4">
+                        //                 <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        //             </div>
+                        //         </div>
+                        //     </a>
+                        //     <Tooltip id="my-tooltip">
+                        //         <div>
+                        //             <h3>This is a very interesting header</h3>
+
+                        //             <button onClick={userLogOut} className="py-1 border border-orange-500 hover:bg-transparent hover:text-orange-500 rounded-md bg-orange-500 w-full text-white text-xl ">Logout</button>
+                        //         </div>
+                        //     </Tooltip>
+                        // </div>
+                        <div className="space-x-3">
+                            <Link to="/login" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Login</Link>
+                            <Link to="/register" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Register</Link>
+                        </div>
+
+
+                }
+
+
             </div>
         </div>
     );

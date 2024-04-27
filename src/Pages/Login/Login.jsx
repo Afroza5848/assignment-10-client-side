@@ -1,7 +1,46 @@
-
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import login from '../../assets/image/bglog.jpg'
+import { useContext, useState } from 'react';
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+
+
 const Login = () => {
+    const { signInUser } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+        const { email, password } = data;
+
+        signInUser(email, password)
+            .then(result => {
+                console.log(result.user);
+                Swal.fire({
+                    title: "Good job!",
+                    text: "User Login Successfully.",
+                    icon: "success"
+                  });
+            })
+            .catch(error => {
+                console.error(error.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'ok'
+                })
+            })
+
+    }
+
     return (
         <div>
 
@@ -11,7 +50,7 @@ const Login = () => {
                     <div className="w-full max-w-lg  p-4 rounded-md shadow sm:p-8 bg-[#08081dE6] dark:text-orange-400">
                         <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
                         <p className="text-sm text-center dark:text-gray-600">Dont have account?
-                            <Link to="register" href="#" rel="noopener noreferrer" className="focus:underline hover:underline text-orange-400 px-2">Sign up here</Link>
+                            <Link to="/register" href="#" rel="noopener noreferrer" className="focus:underline hover:underline text-orange-400 px-2">Sign up here</Link>
                         </p>
                         <div className="my-6 space-y-4">
                             <button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600">
@@ -26,28 +65,33 @@ const Login = () => {
                                 </svg>
                                 <p>Login with GitHub</p>
                             </button>
-                            
+
                         </div>
                         <div className="flex items-center w-full my-4">
                             <hr className="w-full dark:text-gray-600" />
                             <p className="px-3 dark:text-gray-600">OR</p>
                             <hr className="w-full dark:text-gray-600" />
                         </div>
-                        <form noValidate="" action="" className="space-y-8">
+                        <form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-8">
                             <div className="space-y-4">
                                 <div className="space-y-2">
                                     <label htmlFor="email" className="block text-left text-sm">Email address</label>
-                                    <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600" />
+                                    <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600" {...register("email", { required: true })} />
+                                    {errors.email && <span>This field is required</span>}
                                 </div>
-                                <div className="space-y-2">
+                                <div className="space-y-2 relative">
                                     <div className="flex justify-between">
                                         <label htmlFor="password" className="text-sm">Password</label>
-                                        
+
                                     </div>
-                                    <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600" />
+                                    <input type={showPassword ? "text" : "password"} name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600" {...register("password", { required: true })} />
+                                    {errors.password && <span>This field is required</span>}
+                                    <span onClick={() => setShowPassword(!showPassword)} className='absolute top-8 right-4 text-orange-600 text-xl'>
+                                        {showPassword ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+                                    </span>
                                 </div>
                             </div>
-                            <button type="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-orange-500 border border-orange-500 dark:text-white hover:bg-transparent hover:text-orange-500">Sign in</button>
+                            <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-orange-500 border border-orange-500 dark:text-white hover:bg-transparent hover:text-orange-500">Sign in</button>
                         </form>
                     </div>
                 </div>
