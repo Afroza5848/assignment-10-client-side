@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import registerImg from '../../assets/image/register.jpg'
 import logo from '../../assets/image/logo.png'
 import { useForm } from "react-hook-form"
@@ -7,10 +7,15 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import auth from '../../Firebase/Firebase.config';
+import {  updateProfile } from 'firebase/auth';
+
+
 
 const Register = () => {
-    const { createUser,createUpdateProfile } = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -43,8 +48,14 @@ const Register = () => {
         createUser(email, password,name,photo)
             .then(result => {
                 console.log(result.user);
-                createUpdateProfile(name,photo)
+                //createUpdateProfile(name,photo)
                 Swal.fire("User Create Successfully.");
+                updateProfile(auth.currentUser, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                navigate("/login")
+               
             })
             .catch(error => {
                 console.log(error.message)

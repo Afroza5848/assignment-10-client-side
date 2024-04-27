@@ -42,10 +42,9 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, githubProvider);
     }
 
-    // update image and name
+   
     const createUpdateProfile = (name, image) => {
         setUser({
-            ...user,
             displayName: name,
             photoURL: image,
         })
