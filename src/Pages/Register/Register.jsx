@@ -9,7 +9,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser,createUpdateProfile } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const {
         register,
@@ -18,7 +18,7 @@ const Register = () => {
     } = useForm();
     const onSubmit = (data) => {
         console.log(data);
-        const { email, password } = data;
+        const { email, password,name,photo } = data;
 
         if (password.length < 6) {
             Swal.fire({
@@ -40,9 +40,10 @@ const Register = () => {
         }
 
 
-        createUser(email, password)
+        createUser(email, password,name,photo)
             .then(result => {
                 console.log(result.user);
+                createUpdateProfile(name,photo)
                 Swal.fire("User Create Successfully.");
             })
             .catch(error => {

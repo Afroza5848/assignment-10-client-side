@@ -3,6 +3,7 @@ import logo from "../assets/image/logo.png"
 import { Link, NavLink } from "react-router-dom";
 //import { Tooltip } from 'react-tooltip';
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -11,10 +12,9 @@ const Navbar = () => {
         logOut()
             .then(result => {
                 console.log(result.user);
-
-                console.log('user delete successfully')
+                Swal.fire("User Logout Successfully.");
             })
-            .catch(() => console.error())
+            
     }
     // set theme
     const [theme, setTheme] = useState('light');

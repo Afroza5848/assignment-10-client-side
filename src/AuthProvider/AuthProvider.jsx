@@ -1,5 +1,5 @@
 
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from "react";
 import auth from '../Firebase/Firebase.config';
@@ -34,6 +34,21 @@ const AuthProvider = ({children}) => {
     const githubLogin = () => {
         return signInWithPopup(auth, githubProvider);
     }
+    // update image and name
+    const createUpdateProfile = (name,image) => {
+        setUser({
+            ...user,
+            displayName:name,
+            photoURL:image,
+           })
+        return updateProfile(auth.currentUser,{
+            displayName: name,
+            photoURL: image
+        })
+    }
+
+
+
     // observer
     useEffect(() => {
        const unSubscribe =  onAuthStateChanged(auth, currentUser => {
@@ -51,7 +66,8 @@ const AuthProvider = ({children}) => {
         signInUser,
         logOut,
         googleLogin,
-        githubLogin
+        githubLogin,
+        createUpdateProfile
     }
     return (
         <AuthContext.Provider value={authInfo}>
