@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const AddCraftItem = () => {
     const { user } = useContext(AuthContext)
-    const [subCatOption , setSubCatOption] = useState('');
+    const [subCatOption, setSubCatOption] = useState('');
     const [customOption, setCustomOption] = useState('');
-    const [stockOption , setStockOption] = useState('');
+    const [stockOption, setStockOption] = useState('');
     const handleAddItem = event => {
         event.preventDefault();
         const form = event.target;
@@ -18,9 +19,28 @@ const AddCraftItem = () => {
         const processing_time = form.time.value;
         const user_name = user?.displayName;
         const user_email = user?.email;
-        const items = {item_name,massage,photo,price,rating,processing_time,subCatOption,customOption,stockOption,user_name,user_email};
+
+        const items = { item_name, massage, photo, price, rating, processing_time, subCatOption, customOption, stockOption, user_name, user_email };
         console.log(items);
 
+        fetch('http://localhost:5000/items', {
+            method: "POST",
+            headers:{
+                'content-type': "application/json",
+            },
+            body: JSON.stringify(items)
+        })
+            .then(res => res.json())
+            .then(data => {
+               if(data.insertedId){
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Add New Art&Craft item Successfully.",
+                    icon: "success"
+                });
+                form.reset();
+               }
+            })
     }
     // get select option
     const handleSubCatSelect = e => {
@@ -60,7 +80,7 @@ const AddCraftItem = () => {
                                 </select>
                             </div>
                             <div className="col-span-full">
-                            <label htmlFor="lastname" className="text-xl poppins">Short description</label>
+                                <label htmlFor="lastname" className="text-xl poppins">Short description</label>
                                 <textarea id="bio" cols="6" rows="8" name="massage" placeholder="Write short description" className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-900 bg-white focus:dark:ring-orange-600 dark:border-gray-300 pt-2 pl-2 "></textarea>
                             </div>
                             <div className="col-span-full ">
@@ -104,7 +124,7 @@ const AddCraftItem = () => {
 
                         </div>
                     </fieldset>
-                   
+
                 </form>
             </section>
         </div>
