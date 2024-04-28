@@ -8,6 +8,7 @@ import AllCraftItem from "../Pages/AllCraftItem/AllCraftItem";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AddCraftItem from "../Pages/AddCraftItem/AddCraftItem";
 import MyCraftList from "../Pages/MyCraftList/MyCraftList";
+import ItemsDetails from "../components/ItemsDetails/ItemsDetails";
   
 
 export const router = createBrowserRouter([
@@ -30,7 +31,13 @@ export const router = createBrowserRouter([
          },
          {
             path:"/allCraftItem",
-            element:<AllCraftItem></AllCraftItem>
+            element:<AllCraftItem></AllCraftItem>,
+            loader: () => fetch('http://localhost:5000/items')
+         },
+         {
+            path:"/items/:id",
+            element:<PrivateRoute><ItemsDetails></ItemsDetails></PrivateRoute>,
+            loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
          },
          {
             path:"/addCraft",
