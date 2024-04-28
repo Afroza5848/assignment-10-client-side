@@ -6,7 +6,9 @@ import CraftList from "../../components/CraftList/CraftList";
 
 const MyCraftList = () => {
     const {user} = useContext(AuthContext);
+    const [control,setControl] = useState(false)
     const [items,setItems] = useState([]);
+    
     console.log(items);
 
     useEffect(()=> {
@@ -16,12 +18,17 @@ const MyCraftList = () => {
             console.log(data);
             setItems(data);
         })
-    },[user])
+    },[user,control])
 
     return (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 container mx-auto gap-8 my-10">
             {
-                items.map(item => <CraftList key={item.user_email} item={item}></CraftList>)
+                items?.map(item => <CraftList 
+                    key={item.user_email}
+                     item={item}
+                     setControl={setControl}
+                     >
+                     </CraftList>)
             }
         </div>
     );

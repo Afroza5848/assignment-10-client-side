@@ -1,12 +1,14 @@
 
 
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { GiPriceTag } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const CraftList = ({ item }) => {
+const CraftList = ({ item,setControl,control }) => {
     const { _id, item_name, massage, photo, price, rating, customOption, stockOption, user_name, user_email } = item;
+    
     const handleDelete = (_id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -26,11 +28,13 @@ const CraftList = ({ item }) => {
                     .then(data => {
                         console.log(data);
                         if (data.deletedCount > 0) {
+                            setControl(!control);
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your Item has been deleted.",
                                 icon: "success"
                             });
+                          
                         }
                     })
             }
@@ -91,7 +95,10 @@ const CraftList = ({ item }) => {
 };
 
 CraftList.propTypes = {
-    item: PropTypes.object
+    item: PropTypes.object,
+    control:PropTypes.bool,
+    setControl:PropTypes.func
+   
 };
 
 export default CraftList;
