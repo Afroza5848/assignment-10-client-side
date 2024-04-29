@@ -8,7 +8,7 @@ const ItemsDetails = () => {
     const { item_name, massage, photo, price, rating, processing_time, subCatOption, customOption, stockOption, user_name } = item;
 
     return (
-        <div className="w-11/12 p-8 shadow-md dark:bg-gray-50 dark:text-gray-800 container mx-auto">
+        <div className="w-11/12 p-8 shadow-md dark:bg-gray-50 dark:text-gray-800 container mx-auto my-14">
             <div className="flex justify-between pb-4 border-bottom">
                 <div className="flex items-center">
                     <a rel="noopener noreferrer" href="#" className="mb-0 capitalize text-2xl eb-serif dark:text-orange-600">Art And Craft Product Details</a>

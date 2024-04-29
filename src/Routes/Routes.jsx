@@ -10,6 +10,7 @@ import AddCraftItem from "../Pages/AddCraftItem/AddCraftItem";
 import MyCraftList from "../Pages/MyCraftList/MyCraftList";
 import ItemsDetails from "../components/ItemsDetails/ItemsDetails";
 import UpdateItem from "../components/UpdateItem/UpdateItem";
+import SelectedCategory from "../components/SelectedCategory/SelectedCategory";
   
 
 export const router = createBrowserRouter([
@@ -20,7 +21,8 @@ export const router = createBrowserRouter([
       children:[
          {
             path:"/",
-            element:<Home></Home>
+            element:<Home></Home>,
+            loader: () => fetch('http://localhost:5000/categories')
          },
          {
             path:"/login",
@@ -52,6 +54,10 @@ export const router = createBrowserRouter([
             path:"/updateItem/:id",
             element: <UpdateItem></UpdateItem>,
             loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
+         },
+         {
+            path:"/selectedCat/:subcategory_Name",
+            element:<SelectedCategory></SelectedCategory>
          }
       ]
     },

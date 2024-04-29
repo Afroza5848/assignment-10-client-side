@@ -5,31 +5,53 @@ import CraftList from "../../components/CraftList/CraftList";
 
 
 const MyCraftList = () => {
-    const {user} = useContext(AuthContext);
-    const [control,setControl] = useState(false)
-    const [items,setItems] = useState([]);
-    
-    console.log(items);
+    const { user } = useContext(AuthContext);
+    const [control, setControl] = useState(false)
+    const [items, setItems] = useState([]);
+    const [filterCustomization,setFilterCustomization] = useState([])
 
-    useEffect(()=> {
+    console.log(filterCustomization);
+    const handleCustomization = filter => {
+        if(filter === "Yes"){
+            const customYes = items.filter(custom => custom.customOption === "Yes");
+            setFilterCustomization(customYes);
+        }
+        else if(filter === "No"){
+            const customNo = items.filter(custom => custom.customOption === "No");
+            setFilterCustomization(customNo);
+        }
+    }
+
+    useEffect(() => {
         fetch(`http://localhost:5000/myCraftList/${user?.email}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setItems(data);
-        })
-    },[user,control])
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setItems(data);
+                setFilterCustomization(data)
+            })
+    }, [user, control])
 
     return (
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 container mx-auto gap-8 my-10">
-            {
-                items?.map(item => <CraftList 
-                    key={item.user_email}
-                     item={item}
-                     setControl={setControl}
-                     >
-                     </CraftList>)
-            }
+        <div className="container mx-auto">
+            <details className="dropdown my-5 w-64 mx-auto">
+                <summary className="m-1 btn bg-orange-500 text-white text-xl">Filter By Customization</summary>
+                <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                    <li onClick={() => handleCustomization("Yes")}><a>Yes</a></li>
+                    <li onClick={() => handleCustomization("No")}><a>No</a></li>
+                </ul>
+            </details>
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-8 my-10">
+
+                {
+                    filterCustomization?.map(item => <CraftList
+                        key={item._id}
+                        item={item}
+                        setControl={setControl}
+                    >
+                    </CraftList>)
+                }
+            </div>
         </div>
     );
 };

@@ -55,7 +55,7 @@ const AddCraftItem = () => {
 
     return (
         <div>
-            <section className="p-6  text-gray-900  py-10">
+            <section className="p-6 my-12 text-gray-900  py-10">
                 <form onSubmit={handleAddItem} className="container flex flex-col mx-auto space-y-12">
                     <fieldset className="grid grid-cols-4 gap-6 p-8 rounded-md shadow-sm bg-gray-200">
                         <div className="space-y-2 col-span-full lg:col-span-1">

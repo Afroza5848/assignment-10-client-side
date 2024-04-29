@@ -6,7 +6,7 @@ const AllCraftItem = () => {
     console.log(items)
     return (
         <div>
-            <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800">
+            <div className="container p-2 mx-auto my-14 sm:p-4 dark:text-gray-800">
                 <h2 className="mb-5 mt-4 text-4xl font-bold leading-tight text-orange-500 eb-serif">All Art&craft Items List</h2>
                 <div className="overflow-x-auto">
                     <table className="min-w-full text-xs">
@@ -33,7 +33,7 @@ const AllCraftItem = () => {
                         <tbody>
 
                             {
-                                items.map((item, idx) => <tr key={item._id} className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
+                                items?.map((item, idx) => <tr key={item._id} className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
                                     <td className="p-5 text-xl">
                                         <p>{idx + 1}</p>
                                     </td>

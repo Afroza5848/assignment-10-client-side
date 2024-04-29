@@ -1,14 +1,13 @@
 
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import { GiPriceTag } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const CraftList = ({ item,setControl,control }) => {
+const CraftList = ({ item, setControl, control }) => {
     const { _id, item_name, massage, photo, price, rating, customOption, stockOption, user_name, user_email } = item;
-    
+
     const handleDelete = (_id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -34,7 +33,7 @@ const CraftList = ({ item,setControl,control }) => {
                                 text: "Your Item has been deleted.",
                                 icon: "success"
                             });
-                          
+
                         }
                     })
             }
@@ -42,6 +41,7 @@ const CraftList = ({ item,setControl,control }) => {
     }
     return (
         <div>
+            
             <div className="rounded-md shadow-md h-full dark:bg-gray-50  dark:text-gray-800">
                 <div className="flex items-center justify-between p-4">
                     <div className="flex items-center space-x-2">
@@ -96,9 +96,9 @@ const CraftList = ({ item,setControl,control }) => {
 
 CraftList.propTypes = {
     item: PropTypes.object,
-    control:PropTypes.bool,
-    setControl:PropTypes.func
-   
+    control: PropTypes.bool,
+    setControl: PropTypes.func
+
 };
 
 export default CraftList;
