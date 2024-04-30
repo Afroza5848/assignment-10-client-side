@@ -1,30 +1,29 @@
 import { Link, useParams } from "react-router-dom";
-import UseCraftsData from "../../Hooks/UseCraftsData";
 import { GiPriceTag } from "react-icons/gi";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 
 
 
 const SelectedCategory = () => {
-    const [loading, setLoading] = useState(true)
-    const { items } = UseCraftsData();
     const { subcategory_Name } = useParams();
     console.log(subcategory_Name);
-    console.log(items);
-    const filterData = items.filter(item => item.subCatOption.trim() == subcategory_Name.trim());
-    console.log(filterData); 
-    useEffect(() => {
-        if (!items) {
-            setLoading(true);
+   
+    const {isPending, data: items} = useQuery({
+        queryKey: ['filterData'],
+        queryFn: async() => {
+            const res = await fetch('https://jute-and-timber-zone-server.vercel.app/items');
+            return res.json();
         }
-        setLoading(false)
-    }, [items])
-
-        
-    if (loading) {
+    })
+  
+    if (isPending) {
         return <div className='flex justify-center mt-10'><span className="loading loading-bars loading-lg text-orange-600 "></span></div>
     }
+    const filterData = items.filter(item => item.subCatOption.trim() == subcategory_Name.trim());
+    console.log(filterData); 
+        
+    
    
     return (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 container mx-auto my-14 gap-8">

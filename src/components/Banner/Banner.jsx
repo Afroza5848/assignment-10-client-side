@@ -4,6 +4,7 @@ import decor3 from "../../assets/image/decor3.jpg"
 import decor4 from "../../assets/image/decor4.jpg"
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useTypewriter, Cursor } from 'react-simple-typewriter'
 
 // Import Swiper styles
 import 'swiper/css';
@@ -13,12 +14,19 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 const Banner = () => {
+
     const progressCircle = useRef(null);
     const progressContent = useRef(null);
     const onAutoplayTimeLeft = (s, time, progress) => {
         progressCircle.current.style.setProperty('--progress', 1 - progress);
         progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     };
+    const [typeEffect] = useTypewriter({
+        words: [' Furniture','Kitchenware','wooden jewellery'],
+        loop: {},
+        typeSpeed: 200,
+        delaySpeed: 30,
+    });
     return (
 
         <>
@@ -26,7 +34,12 @@ const Banner = () => {
             <section className="lg:mb-[200px] md:mb-[100px] mb-[50px]">
                 <div className="bg-orange-400">
                     <div className="container flex flex-col items-center px-4 py-16 pb-24 mx-auto text-center lg:pb-56 md:py-32 md:px-10 lg:px-32 dark:text-gray-50">
-                        <h1 className="text-5xl font-bold leading-none sm:text-6xl xl:max-w-3xl dark:text-gray-50 monts">Decor&Craft Furniture </h1>
+                        <h1 className="text-5xl font-bold leading-none sm:text-6xl xl:max-w-3xl dark:text-gray-50 monts">Decor & Craft
+                            <span className="ml-2 text-gray-800">
+                                {typeEffect}
+                            </span>
+                            <Cursor cursorColor='white' />
+                        </h1>
                         <p className="mt-6 mb-8 text-2xl sm:mb-12 xl:max-w-3xl dark:text-gray-50 poppins">Welcome To Jute & Wooden Furniture Shop!</p>
                         <div className="flex flex-wrap justify-center">
                             <button type="button" className="px-8 py-3 m-2 text-lg font-semibold rounded dark:bg-gray-800 dark:text-gray-100">Shop Now</button>
@@ -67,8 +80,8 @@ const Banner = () => {
 
 
                         <div className="autoplay-progress w-12 h-12 absolute bottom-12 z-20 right-4 bg-transparent" slot="container-end">
-                            <svg  viewBox="0 0 48 48" ref={progressCircle}>
-                                <circle  cx="24" cy="24" ></circle>
+                            <svg viewBox="0 0 48 48" ref={progressCircle}>
+                                <circle cx="24" cy="24" ></circle>
                             </svg>
                             <span className="border-2 border-slate-900 px-3 py-2 rounded-full" ref={progressContent}></span>
                         </div>
@@ -76,7 +89,7 @@ const Banner = () => {
                 </div>
 
             </section>
-            
+
         </>
 
 
