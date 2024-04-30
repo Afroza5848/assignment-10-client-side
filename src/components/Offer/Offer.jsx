@@ -2,22 +2,35 @@
 import bottom from "../../assets/image/bottomBg.png"
 import { useLottie } from "lottie-react";
 import lottieOffer from "../../assets/image/animati0n.json"
+import { Cursor, useTypewriter } from "react-simple-typewriter";
 const Offer = () => {
     const options = {
         animationData: lottieOffer,
         loop: true
       };
     const { View } = useLottie(options);
+    const [typeEffect] = useTypewriter({
+        words: ['  Purchase!',' Shoping!','Buying!'],
+        loop: {},
+        typeSpeed: 200,
+        delaySpeed: 30,
+    });
     return (
         <div className="w-full ">
             <section className="dark:bg-gray-100 dark:text-gray-800 relative">
-                <div className="container flex flex-col items-center justify-center  mx-auto  lg:flex-row lg:justify-between">
+                <div className="container grid lg:grid-cols-2 grid-cols-1 gap-6 ">
                     <div className="flex items-center justify-center p-6 h-full mt-8 lg:mt-0">
                         {View}
                     </div>
                     <div className="flex flex-col justify-center p-6 text-center rounded-sm ">
                         <h1 className="text-6xl font-bold leading-[60px] text-center">
-                            <span className="dark:text-orange-500 poppins"> Get 30% Off </span> Your Next Purchase!
+                            <span className="dark:text-orange-500 poppins"> Get 30% Off 
+                            </span> Your Next
+                            <span className="ml-2 text-gray-800">
+                                {typeEffect}
+                            </span>
+                            <Cursor cursorColor='orange' />
+                            
                         </h1>
                         <p className="mt-6 mb-8 text-lg sm:mb-12">Looking to upgrade your wardrobe? Now the perfect time! Enjoy exclusive <br /> savings with our latest offer: Get 30% off on all purchases.
                         </p>
