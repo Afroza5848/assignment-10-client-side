@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
          {
             path:"/",
             element:<Home></Home>,
-            loader: () => fetch('http://localhost:5000/categories')
+            loader: () => fetch('https://jute-and-timber-zone-server.vercel.app/categories')
          },
          {
             path:"/login",
@@ -35,12 +35,12 @@ export const router = createBrowserRouter([
          {
             path:"/allCraftItem",
             element:<AllCraftItem></AllCraftItem>,
-            loader: () => fetch('http://localhost:5000/items')
+            loader: () => fetch('https://jute-and-timber-zone-server.vercel.app/items')
          },
          {
             path:"/items/:id",
             element:<PrivateRoute><ItemsDetails></ItemsDetails></PrivateRoute>,
-            loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
+            loader: ({params}) => fetch(`https://jute-and-timber-zone-server.vercel.app/items/${params.id}`)
          },
          {
             path:"/addCraft",
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
          {
             path:"/updateItem/:id",
             element: <UpdateItem></UpdateItem>,
-            loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
+            loader: ({params}) => fetch(`https://jute-and-timber-zone-server.vercel.app/items/${params.id}`)
          },
          {
             path:"/selectedCat/:subcategory_Name",

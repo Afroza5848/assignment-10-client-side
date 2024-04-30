@@ -1,4 +1,5 @@
 import Banner from "../../components/Banner/Banner";
+import Charts from "../../components/Charts/Charts";
 import CraftCategories from "../../components/CraftCategories/CraftCategories";
 import Offer from "../../components/Offer/Offer";
 import CraftItems from "./CraftItems";
@@ -11,6 +12,7 @@ const Home = () => {
             <CraftItems></CraftItems>
             <Offer></Offer>
             <CraftCategories></CraftCategories>
+            <Charts></Charts>
         </div>
     );
 };

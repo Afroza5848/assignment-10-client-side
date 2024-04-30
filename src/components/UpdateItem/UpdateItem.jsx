@@ -27,7 +27,7 @@ const UpdateItem = () => {
         const updateItems = { item_name, massage, photo, price, rating, processing_time, subCatOption, customOption, stockOption };
         console.log(updateItems);
 
-        fetch(`http://localhost:5000/items/${_id}`, {
+        fetch(`https://jute-and-timber-zone-server.vercel.app/items/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': "application/json",

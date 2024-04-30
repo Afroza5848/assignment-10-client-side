@@ -1,8 +1,22 @@
+import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
 
 const AllCraftItem = () => {
+    const [loading,setLoading] = useState(true);
     const items = useLoaderData();
+
+    useEffect(() => {
+        if(!items){
+            setLoading(true);
+        }
+        setLoading(false)
+    },[items])
+
+    if(loading){
+        return <div className='flex justify-center mt-20'><span className="loading loading-bars loading-lg text-orange-600 "></span></div>
+    }
+   
     console.log(items)
     return (
         <div>

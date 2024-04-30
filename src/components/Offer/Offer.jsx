@@ -1,4 +1,4 @@
-import offerImg from "../../assets/image/offer.png"
+
 import bottom from "../../assets/image/bottomBg.png"
 import { useLottie } from "lottie-react";
 import lottieOffer from "../../assets/image/animati0n.json"
@@ -17,7 +17,7 @@ const Offer = () => {
                     </div>
                     <div className="flex flex-col justify-center p-6 text-center rounded-sm ">
                         <h1 className="text-6xl font-bold leading-[60px] text-center">
-                            <span className="dark:text-orange-500"> Get 30% Off </span> Your Next Purchase!
+                            <span className="dark:text-orange-500 poppins"> Get 30% Off </span> Your Next Purchase!
                         </h1>
                         <p className="mt-6 mb-8 text-lg sm:mb-12">Looking to upgrade your wardrobe? Now the perfect time! Enjoy exclusive <br /> savings with our latest offer: Get 30% off on all purchases.
                         </p>

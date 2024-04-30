@@ -19,7 +19,7 @@ const CraftList = ({ item, setControl, control }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/items/${_id}`, {
+                fetch(`https://jute-and-timber-zone-server.vercel.app/items/${_id}`, {
                     method: "DELETE",
 
                 })

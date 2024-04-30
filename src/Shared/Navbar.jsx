@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [theme, setTheme] = useState('');
     console.log(logOut);
     const userLogOut = () => {
         logOut()
@@ -14,10 +15,18 @@ const Navbar = () => {
                 console.log(result.user);
                 Swal.fire("User Logout Successfully.");
             })
-            
+
     }
     // set theme
-    const [theme, setTheme] = useState('light');
+    
+    useEffect(() => {
+        const currentTheme = localStorage.getItem('theme');
+        localStorage.setItem('theme', theme || currentTheme);
+
+        const localTheme = localStorage.getItem('theme');
+        document.querySelector('html').setAttribute('data-theme', localTheme)
+    }, [theme])
+
     const handleTheme = (e) => {
         if (e.target.checked) {
             setTheme('synthwave')
@@ -27,11 +36,6 @@ const Navbar = () => {
         }
         console.log(theme);
     }
-    useEffect(() => {
-        localStorage.setItem('theme', theme);
-        const localTheme = localStorage.getItem('theme');
-        document.querySelector('html').setAttribute('data-theme', localTheme)
-    }, [theme])
 
 
 
@@ -75,6 +79,10 @@ const Navbar = () => {
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-900 rounded-box w-52 space-y-3">
                         {navLink}
+                        <div className="space-x-3 flex lg:flex-row flex-col gap-5">
+                            <Link to="/login" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Login</Link>
+                            <Link to="/register" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Register</Link>
+                        </div>
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">
@@ -84,6 +92,7 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-6 ">
                     {navLink}
+
                 </ul>
             </div>
             <div className="navbar-end space-x-3">
@@ -107,7 +116,7 @@ const Navbar = () => {
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                
+
                                 <button onClick={userLogOut} className="py-1 border border-orange-500 hover:bg-transparent hover:text-orange-500 rounded-md bg-orange-500 w-full text-white text-xl ">Logout</button>
                             </ul>
                         </div>
@@ -133,7 +142,7 @@ const Navbar = () => {
                         //         </div>
                         //     </Tooltip>
                         // </div>
-                        <div className="space-x-3">
+                        <div className="space-x-3 md:flex hidden">
                             <Link to="/login" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Login</Link>
                             <Link to="/register" className="px-4 py-2 rounded-md text-white border bg-orange-500 border-orange-500 hover:bg-transparent hover:text-orange-500 eb-serif font-medium text-xl">Register</Link>
                         </div>

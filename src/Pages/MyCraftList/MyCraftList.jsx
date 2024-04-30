@@ -23,7 +23,7 @@ const MyCraftList = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myCraftList/${user?.email}`)
+        fetch(`https://jute-and-timber-zone-server.vercel.app/myCraftList/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);

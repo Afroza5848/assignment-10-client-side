@@ -4,15 +4,22 @@ import { Link } from "react-router-dom";
 
 
 const CraftItems = () => {
+    const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     console.log(items);
     useEffect(() => {
-        fetch('http://localhost:5000/items')
+        setLoading(true)
+        fetch('https://jute-and-timber-zone-server.vercel.app/items')
             .then(res => res.json())
             .then(data => {
                 setItems(data)
+                setLoading(false)
             })
     }, [])
+    
+    if(loading){
+        return <div className='flex justify-center mt-20'><span className="loading loading-bars loading-lg text-orange-600 "></span></div>
+    }
     return (
         <div className="container mx-auto my-14">
             <div className="text-center mb-12">

@@ -1,8 +1,13 @@
-# React + Vite
+# Website Name: DecorArt
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Visit the live site: [DecorArt](https://jute-and-timberzone.web.app/)
 
-Currently, two official plugins are available:
+# Selected Category:  Jute & wooden Crafts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# features and characteristics
+
+
+# Npm Package Used For This Website
+
+- Lottie React
+- Swiper Slider

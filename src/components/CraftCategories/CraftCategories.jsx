@@ -1,11 +1,23 @@
+import { useEffect, useState } from "react";
 import { GiPriceTag } from "react-icons/gi";
 import { Link, useLoaderData } from "react-router-dom";
 
 
 const CraftCategories = () => {
+    const [loading,setLoading] = useState(true)
     const categories = useLoaderData();
     console.log(categories);
 
+    useEffect(() => {
+        if(!categories){
+            setLoading(true);
+        }
+        setLoading(false)
+    },[categories])
+
+    if(loading){
+        return <div className='flex justify-center mt-20'><span className="loading loading-bars loading-lg text-orange-600 "></span></div>
+    }
     return (
         <div className="container mx-auto mt-16">
             <div className="text-center mb-12">
@@ -18,7 +30,7 @@ const CraftCategories = () => {
                         <div  className=" p-6  border border-gray-200 dark:text-gray-900">
                             <img src={category.image} alt="" className="object-cover object-center w-full  h-72 dark:bg-gray-500" />
                             <div className="mt-6 mb-2">
-                                <span className="block text-xs font-medium  dark:text-violet-600">{category.item_name}</span>
+                                <span className="block text-xs font-medium  dark:text-gray-600">{category.item_name}</span>
                                 <h2 className="text-2xl font-semibold text-orange-600 flex items-center gap-2"><GiPriceTag className="text-gray-800 " />{category.subcategory_Name}</h2>
                             </div>
                             {/* <p className="dark:text-gray-800">{category.short_description}</p> */}

@@ -23,7 +23,7 @@ const AddCraftItem = () => {
         const items = { item_name, massage, photo, price, rating, processing_time, subCatOption, customOption, stockOption, user_name, user_email };
         console.log(items);
 
-        fetch('http://localhost:5000/items', {
+        fetch('https://jute-and-timber-zone-server.vercel.app/items', {
             method: "POST",
             headers:{
                 'content-type': "application/json",
